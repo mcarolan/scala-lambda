@@ -12,4 +12,10 @@ Resources:
       Description: ''
       MemorySize: 512
       Timeout: 15
-      Role: 'arn:aws:iam::149271426415:role/service-role/lambda_basic_execution'
+      Role: 'arn:aws:iam::149271426415:role/lambda-execute-role'
+      Events:
+        HelloApi:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: GET
