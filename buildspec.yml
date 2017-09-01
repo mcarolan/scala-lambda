@@ -1,0 +1,21 @@
+
+version: 0.1
+phases:
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Run the test and package the code...
+      - sbt compile
+      - sbt assembly
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - mkdir deploy
+      - mkdir deploy/lib
+      - cp target/scala-2.12/HelloHandler-assembly-0.1.0-SNAPSHOT.jar deploy/lib
+      - aws cloudformation package --template-file samTemplate.yaml --s3-bucket martin-scala-lambda --output-template-file NewSamTemplate.yaml
+artifacts:
+  type: zip
+  files:
+    - deploy/lib/HelloHandler-assembly-0.1.0-SNAPSHOT.jar
+    - NewSamTemplate.yaml
