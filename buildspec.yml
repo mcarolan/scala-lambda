@@ -15,7 +15,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - mkdir -p deploy/$(md5sum target/scala-2.12/HelloHandler-assembly-0.1.0-SNAPSHOT.jar | cut -f1 -d" ")
-      - ls deploy
+      - cp target/scala-2.12/HelloHandler-assembly-0.1.0-SNAPSHOT.jar deploy/$(md5sum target/scala-2.12/HelloHandler-assembly-0.1.0-SNAPSHOT.jar | cut -f1 -d" ")/HelloHandler.jar
 artifacts:
   files:
     - deploy/**/*
