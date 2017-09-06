@@ -1,6 +1,10 @@
 
 version: 0.1
 phases:
+  pre-build:
+    commands:
+      - apt-get update -y
+      - apt-get install sbt
   build:
     commands:
       - echo Build started on `date`
@@ -12,10 +16,3 @@ phases:
       - echo Build completed on `date`
       - mkdir deploy
       - mkdir deploy/lib
-      - cp target/scala-2.12/HelloHandler-assembly-0.1.0-SNAPSHOT.jar deploy/lib
-      - aws cloudformation package --template-file samTemplate.yaml --s3-bucket martin-scala-lambda --output-template-file NewSamTemplate.yaml
-artifacts:
-  type: zip
-  files:
-    - deploy/lib/HelloHandler-assembly-0.1.0-SNAPSHOT.jar
-    - NewSamTemplate.yaml
