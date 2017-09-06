@@ -14,5 +14,10 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - mkdir deploy
-      - mkdir deploy/lib
+      - export ARTIFACT=target/scala-2.12/HelloHandler-assembly-0.1.0-SNAPSHOT.jar
+      - export ARTIFACT_HASH=$(md5sum $ARTIFACT | cut -f1 -d" ")
+      - mkdir -p deploy/$ARTIFACT_HASH
+      - cp $ARTIFACT deploy/$ARTIFACT_HASH
+  artifacts:
+    files:
+      - deploy/**/*
