@@ -18,6 +18,6 @@ phases:
       - export ARTIFACT_HASH=$(md5sum $ARTIFACT | cut -f1 -d" ")
       - mkdir -p deploy/$ARTIFACT_HASH
       - cp $ARTIFACT deploy/$ARTIFACT_HASH
-  artifacts:
-    files:
-      - deploy/**/*
+artifacts:
+  files:
+    - deploy/**/*
